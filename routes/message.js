@@ -9,9 +9,9 @@ router.get('/', (req, res) => {
 
 
 router.post('/', (req, res) => {
-    var speech = req.body.queryResult.parameters.echoText;
+    var message = req.body.queryResult.parameters.messageText;
     return res.send({
-        fulfillmentText: speech + " response from Node End Point",
+        fulfillmentText: message + " response from Node End Point",
         /* "fulfillmentMessages": [
             {
               "card": {
