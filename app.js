@@ -18,11 +18,11 @@ app.get('/', (req, res) => {
   res.send('Virtual sales bot End poin');
 });
 
-app.use('/message' , message)
+app.use('/message' , message);
  
 
 
 const port = process.env.PORT || 3000;
-app.listen(port, function () {
+app.listen(port, () => {
   console.log("Server up and listening at", port);
 });

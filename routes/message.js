@@ -3,12 +3,12 @@ const moongoose = require('mongoose');
 
 const router = express.Router();
 
-router.get('/', async (req, res) => {
+router.get('/',(req, res) => {
     res.send('Get request on end point');
 });
 
 
-router.post('/', async (req, res) => {
+router.post('/',(req, res) => {
     var speech =
     req.body.queryResult &&
       req.body.queryResult.parameters &&
