@@ -12,7 +12,7 @@ router.post('/', (req, res) => {
     var speech = req.body.queryResult.parameters.echoText;
     return res.send({
         fulfillmentText: speech + " response from Node End Point",
-        "fulfillmentMessages": [
+        /* "fulfillmentMessages": [
             {
               "card": {
                 "title": "card title",
@@ -26,7 +26,7 @@ router.post('/', (req, res) => {
                 ]
               }
             }
-          ],
+          ], */
         source: "virtual sales bot",
         payload : {
             name : "saeed",
