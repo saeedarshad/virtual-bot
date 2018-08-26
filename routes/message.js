@@ -12,12 +12,21 @@ router.post('/', (req, res) => {
     var speech = req.body.queryResult.parameters.echoText;
     return res.send({
         fulfillmentText: speech + " response from Node End Point",
-        fulfillmentMessages : [
+        "fulfillmentMessages": [
             {
-                 company : "iphone",
-                 model : "6s"
-            }  
-        ],
+              "card": {
+                "title": "card title",
+                "subtitle": "card text",
+                "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+                "buttons": [
+                  {
+                    "text": "button text",
+                    "postback": "https://assistant.google.com/"
+                  }
+                ]
+              }
+            }
+          ],
         source: "virtual sales bot",
         payload : {
             name : "saeed",
