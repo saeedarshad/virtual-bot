@@ -15,7 +15,7 @@ app.use(
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-  res.send('Virtual sales bot End poin');
+  res.send('Virtual sales bot End point');
 });
 
 app.use('/message' , message);

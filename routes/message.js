@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
     var speech = req.body.queryResult.parameters.echoText;
     return res.send({
-        fulfillmentText: speech + " response from node app",
+        fulfillmentText: speech + " response from Node End Point",
         fulfillmentMessages : [
             {
                  company : "iphone",
