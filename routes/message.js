@@ -12,7 +12,17 @@ router.post('/', (req, res) => {
     var speech = req.body.queryResult.parameters.echoText;
     return res.send({
         fulfillmentText: speech + " response from node app",
-        source: "webhook-echo-sample"
+        fulfillmentMessages : [
+            {
+                 company : "iphone",
+                 model : "6s"
+            }  
+        ],
+        source: "virtual sales bot",
+        payload : {
+            name : "saeed",
+            age : 22
+        }
     });
 });
 
