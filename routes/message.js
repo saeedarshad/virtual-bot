@@ -1,7 +1,8 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
 
-const url = "mongodb://localhost:27017/TodoApp";
+const url =
+  "mongodb://saeedarshadd:vsalesbot@ds211083.mlab.com:11083/vsalesbot";
 
 const router = express.Router();
 
@@ -65,7 +66,7 @@ async function connection() {
   if (client.error) return console.log("unable to connect to mongodb server");
   console.log("Connected successfully to mongodb server");
 
-  var db = client.db("BOT");
+  var db = client.db("vsalesbot");
 
   return db;
 }
