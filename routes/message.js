@@ -8,7 +8,7 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  var entity = req.body.queryResult.parameters.messageText;
+  var entity = req.body.queryResult.parameters.mobile;
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
   return res.send({
