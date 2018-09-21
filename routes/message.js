@@ -17,7 +17,7 @@ router.post("/", async (req, res) => {
     .find({ Price: { $lt: 2 } })
     .toArray();
 
-  //console.log("result is : ", result);
+  console.log("result is : ", typeof result);
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
@@ -26,7 +26,7 @@ router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText; */
   return res.send({
-    fulfillmentText: result,
+    fulfillmentText: JSON.stringify(result),
     /* mobile +
       " is mobile.. " +
       // memory +
