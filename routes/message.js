@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   var message = req.body.queryResult.parameters.messageText;
-  var intent = req.body.queryResult.intent;
+  var intent = req.body.queryResult.intent.displayName;
   return res.send({
     fulfillmentText:
       message + " response from Node End Point and This is " + intent,
