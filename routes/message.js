@@ -1,18 +1,19 @@
-const express = require('express');
-const moongoose = require('mongoose');
+const express = require("express");
+const moongoose = require("mongoose");
 
 const router = express.Router();
 
-router.get('/', (req, res) => {
-    res.send('Get request on end point');
+router.get("/", (req, res) => {
+  res.send("Get request on end point");
 });
 
-
-router.post('/', (req, res) => {
-    var message = req.body.queryResult.parameters.messageText;
-    return res.send({
-        fulfillmentText: message + " response from Node End Point",
-        /* "fulfillmentMessages": [
+router.post("/", (req, res) => {
+  var message = req.body.queryResult.parameters.messageText;
+  var intent = req.body.queryResult.intent;
+  return res.send({
+    fulfillmentText:
+      message + " response from Node End Point and This is " + intent,
+    /* "fulfillmentMessages": [
             {
               "card": {
                 "title": "card title",
@@ -27,14 +28,12 @@ router.post('/', (req, res) => {
               }
             }
           ], */
-        source: "virtual sales bot",
-        payload : {
-            name : "saeed",
-            age : 22
-        }
-    });
+    source: "virtual sales bot",
+    payload: {
+      name: "saeed",
+      age: 22
+    }
+  });
 });
-
-
 
 module.exports = router;
