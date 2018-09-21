@@ -8,13 +8,20 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  var entity = req.body.queryResult.parameters.mobile;
+  var mobile = req.body.queryResult.parameters.mobile;
+  var memory = req.body.queryResult.parameters.memory - gb;
+  var colour = req.body.queryResult.parameters.colour;
+
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
   return res.send({
     fulfillmentText:
-      entity +
-      " is entity.. " +
+      mobile +
+      " is mobile.. " +
+      memory +
+      " in gb.. " +
+      colour +
+      " is colour.. " +
       message +
       " is text from user " +
       "response from Node End Point and This is " +
