@@ -1,6 +1,6 @@
 const express = require("express");
 const MongoClient = require("mongodb").MongoClient;
-
+//const url = "mongodb://localhost:27017/BOT";
 const url =
   "mongodb://saeedarshadd:vsalesbot@ds211083.mlab.com:11083/vsalesbot";
 
@@ -14,17 +14,19 @@ router.post("/", async (req, res) => {
   const db = await connection();
   const result = await db
     .collection("iphones")
-    .find({ price: { $lte: 10 } })
+    .find({ Price: { $lt: 2 } })
     .toArray();
 
-  var mobile = req.body.queryResult.parameters.mobiles;
+  //console.log("result is : ", result);
+
+  /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
   var colour = req.body.queryResult.parameters.colour;
 
   var intent = req.body.queryResult.intent.displayName;
-  var message = req.body.queryResult.queryText;
+  var message = req.body.queryResult.queryText; */
   return res.send({
-    fulfillmentText: "result is " + result,
+    fulfillmentText: result,
     /* mobile +
       " is mobile.. " +
       // memory +
@@ -67,6 +69,7 @@ async function connection() {
   console.log("Connected successfully to mongodb server");
 
   var db = client.db("vsalesbot");
+  // var db = client.db("BOT");
 
   return db;
 }
