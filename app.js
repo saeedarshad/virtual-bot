@@ -1,8 +1,8 @@
 const express = require("express");
 const bodyParser = require("body-parser");
-const message = require('./routes/message');
+const message = require("./routes/message");
 
-require('./db')();
+//require('./db')();
 
 const app = express();
 
@@ -14,13 +14,11 @@ app.use(
 
 app.use(bodyParser.json());
 
-app.get('/', (req, res) => {
-  res.send('Virtual sales bot End point');
+app.get("/", (req, res) => {
+  res.send("Virtual sales bot End point");
 });
 
-app.use('/message' , message);
- 
-
+app.use("/message", message);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {

@@ -1,5 +1,7 @@
 const express = require("express");
-const moongoose = require("mongoose");
+const MongoClient = require("mongodb").MongoClient;
+
+const url = "mongodb://localhost:27017/TodoApp";
 
 const router = express.Router();
 
@@ -7,16 +9,22 @@ router.get("/", (req, res) => {
   res.send("Get request on end point");
 });
 
-router.post("/", (req, res) => {
-  var mobile = req.body.queryResult.parameters.mobile;
+router.post("/", async (req, res) => {
+  const db = await connection();
+  const result = await db
+    .collection("iphones")
+    .find({ price: { $lte: 10 } })
+    .toArray();
+
+  var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
   var colour = req.body.queryResult.parameters.colour;
 
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
   return res.send({
-    fulfillmentText:
-      mobile +
+    fulfillmentText: "result is " + result,
+    /* mobile +
       " is mobile.. " +
       // memory +
       //" in gb.. " +
@@ -25,7 +33,7 @@ router.post("/", (req, res) => {
       message +
       " is text from user " +
       "response from Node End Point and This is " +
-      intent,
+      intent, */
     /* "fulfillmentMessages": [
             {
               "card": {
@@ -48,5 +56,18 @@ router.post("/", (req, res) => {
     }
   });
 });
+
+async function connection() {
+  const client = await MongoClient.connect(
+    url,
+    { useNewUrlParser: true }
+  );
+  if (client.error) return console.log("unable to connect to mongodb server");
+  console.log("Connected successfully to mongodb server");
+
+  var db = client.db("BOT");
+
+  return db;
+}
 
 module.exports = router;
