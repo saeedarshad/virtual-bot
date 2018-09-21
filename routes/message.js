@@ -8,11 +8,17 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req, res) => {
-  var message = req.body.queryResult.parameters.messageText;
+  var entity = req.body.queryResult.parameters.messageText;
   var intent = req.body.queryResult.intent.displayName;
+  var message = req.body.queryResult.queryText;
   return res.send({
     fulfillmentText:
-      message + " response from Node End Point and This is " + intent,
+      entity +
+      " is entity.. " +
+      message +
+      " is text from user " +
+      "response from Node End Point and This is " +
+      intent,
     /* "fulfillmentMessages": [
             {
               "card": {
