@@ -9,7 +9,7 @@ router.get("/", (req, res) => {
 
 router.post("/", (req, res) => {
   var mobile = req.body.queryResult.parameters.mobile;
-  var memory = req.body.queryResult.parameters.memory - gb;
+  //var memory = req.body.queryResult.parameters.memorygb;
   var colour = req.body.queryResult.parameters.colour;
 
   var intent = req.body.queryResult.intent.displayName;
@@ -18,8 +18,8 @@ router.post("/", (req, res) => {
     fulfillmentText:
       mobile +
       " is mobile.. " +
-      memory +
-      " in gb.. " +
+      // memory +
+      //" in gb.. " +
       colour +
       " is colour.. " +
       message +
