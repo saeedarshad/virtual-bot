@@ -1,9 +1,5 @@
 const express = require("express");
-const MongoClient = require("mongodb").MongoClient;
-//const url = "mongodb://localhost:27017/BOT";
-const url =
-  "mongodb://saeedarshadd:vsalesbot123@ds211083.mlab.com:11083/vsalesbot";
-
+const connection = require('../db');
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -14,7 +10,11 @@ router.post("/", async (req, res) => {
   const db = await connection();
   const result = await db
     .collection("iphones")
-    .find({ Price: { $lt: 2 } })
+    .find({
+      Price: {
+        $lt: 2
+      }
+    })
     .toArray();
 
   console.log("result is : ", typeof result);
@@ -60,18 +60,6 @@ router.post("/", async (req, res) => {
   });
 });
 
-async function connection() {
-  const client = await MongoClient.connect(
-    url,
-    { useNewUrlParser: true }
-  );
-  if (client.error) return console.log("unable to connect to mongodb server");
-  console.log("Connected successfully to mongodb server");
 
-  var db = client.db("vsalesbot");
-  // var db = client.db("BOT");
-
-  return db;
-}
 
 module.exports = router;
