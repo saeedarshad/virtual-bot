@@ -8,6 +8,9 @@ router.get("/", (req, res) => {
 
 router.post("/", async (req, res) => {
   const db = await connection();
+  var colour = req.body.queryResult.parameters.colour;
+  var memory = req.body.queryResult.parameters.memorygb;
+
   const result = await db
     .collection("iphones")
     .findOne({
@@ -15,7 +18,7 @@ router.post("/", async (req, res) => {
         $gt: 50
       },
       $text: {
-        $search: "\"5s\" Black"
+        $search: colour + ' ' + memory
       }
     }, {
       score: {
