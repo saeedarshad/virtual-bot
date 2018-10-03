@@ -60,7 +60,7 @@ router.post("/", async (req, res) => {
     "fulfillmentMessages": [{
       "card": {
         "title": result.Title,
-        "subtitle": "Iphone",
+        "subtitle": "Iphone" + session,
         "imageUri": "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
         "buttons": [{
           "text": "Buy",
