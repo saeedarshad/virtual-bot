@@ -54,16 +54,22 @@ router.post("/", async (req, res) => {
       "response from Node End Point and This is " +
       intent, */
     "fulfillmentMessages": [{
-      "card": {
         "title": result.Title,
-        "subtitle": "Iphone",
-        "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-        "buttons": [{
-          "text": "Buy",
-          "postback": "https://assistant.google.com/"
-        }]
+        "subtitle": Iphone,
+        "formattedText": string,
       }
-    }],
+      /* , {
+            "card": {
+              "title": result.Title,
+              "subtitle": "Iphone",
+              "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
+              "buttons": [{
+                "text": "Buy",
+                "postback": "https://assistant.google.com/"
+              }]
+            }
+          } */
+    ],
     source: "virtual sales bot",
     payload: {
       name: "saeed",
