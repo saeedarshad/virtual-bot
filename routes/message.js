@@ -55,9 +55,9 @@ router.post("/", async (req, res) => {
       intent, */
     "fulfillmentMessages": [{
       "card": {
-        "title": "Mobile",
+        "title": result.Title,
         "subtitle": "Iphone",
-        "imageUri": "https://www.google.com.pk/search?q=iphone+5+image&source=lnms&tbm=isch&sa=X&ved=0ahUKEwiBn-zOrurdAhUI_SoKHbDqCWsQ_AUIDigB&biw=1366&bih=626#imgrc=fc129Q30dapyZM:",
+        "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
         "buttons": [{
           "text": "Buy",
           "postback": "https://assistant.google.com/"
