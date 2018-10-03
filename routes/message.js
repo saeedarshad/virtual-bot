@@ -54,10 +54,6 @@ router.post("/", async (req, res) => {
       "response from Node End Point and This is " +
       intent, */
     "fulfillmentMessages": [{
-      "text": [
-        'Data from database'
-      ]
-    }, {
       "card": {
         "title": result.Title,
         "subtitle": "Iphone",
