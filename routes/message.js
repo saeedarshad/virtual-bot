@@ -1,5 +1,5 @@
 const express = require("express");
-const connection = require('../db');
+const connection = require("../db");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -10,14 +10,29 @@ router.post("/", async (req, res) => {
   const db = await connection();
   const result = await db
     .collection("iphones")
-    .find({
+    .findOne({
+      Price: {
+        $gt: 50
+      },
+      $text: {
+        $search: "\"5s\" Black"
+      }
+    }, {
+      score: {
+        $meta: "textScore"
+      }
+    });
+
+  /* const result = await db
+    .collection("iphones")
+    .findOne({
       Price: {
         $lt: 2
       }
-    })
-    .toArray();
+    }); */
+  //.toArray();
 
-  console.log("result is : ", typeof result);
+  console.log("result is : ", result.Title);
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
@@ -26,7 +41,8 @@ router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText; */
   return res.send({
-    fulfillmentText: JSON.stringify(result),
+    fulfillmentText: result.Title + ' ' +
+      result.Price,
     /* mobile +
       " is mobile.. " +
       // memory +
@@ -59,7 +75,5 @@ router.post("/", async (req, res) => {
     }
   });
 });
-
-
 
 module.exports = router;
