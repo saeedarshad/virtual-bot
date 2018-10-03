@@ -10,6 +10,7 @@ router.post("/", async (req, res) => {
   const db = await connection();
   var colour = req.body.queryResult.parameters.colour;
   var memory = req.body.queryResult.parameters.memorygb;
+  var session = req.body.session;
 
   const result = await db
     .collection("iphones")
@@ -35,7 +36,7 @@ router.post("/", async (req, res) => {
     }); */
   //.toArray();
 
-  console.log("result is : ", result.Title);
+  console.log("session is : ", session);
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
