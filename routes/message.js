@@ -54,22 +54,16 @@ router.post("/", async (req, res) => {
       "response from Node End Point and This is " +
       intent, */
     "fulfillmentMessages": [{
+      "card": {
         "title": result.Title,
-        "subtitle": Iphone,
-        "formattedText": string,
+        "subtitle": "Iphone",
+        "imageUri": "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
+        "buttons": [{
+          "text": "Buy",
+          "postback": "https://assistant.google.com/"
+        }]
       }
-      /* , {
-            "card": {
-              "title": result.Title,
-              "subtitle": "Iphone",
-              "imageUri": "https://assistant.google.com/static/images/molecule/Molecule-Formation-stop.png",
-              "buttons": [{
-                "text": "Buy",
-                "postback": "https://assistant.google.com/"
-              }]
-            }
-          } */
-    ],
+    }],
     source: "virtual sales bot",
     payload: {
       name: "saeed",
