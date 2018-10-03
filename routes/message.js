@@ -57,7 +57,12 @@ router.post("/", async (req, res) => {
       "card": {
         "title": result.Title,
         "subtitle": "Iphone",
-        "imageUri": "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
+        "image": {
+          "url": "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
+          "accessibilityText": 'This is imageeeee',
+          "height": 250,
+          "width": 250
+        },
         "buttons": [{
           "text": "Buy",
           "postback": "https://assistant.google.com/"
