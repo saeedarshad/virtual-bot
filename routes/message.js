@@ -15,8 +15,8 @@ router.post("/", async (req, res) => {
   var session = req.body.session;
 
   const iphone = await Iphone.findOne({
-    Price: {
-      $gt: 50
+    price: {
+      $gt: 100000
     },
   });
 
@@ -29,8 +29,11 @@ router.post("/", async (req, res) => {
     }); */
   //.toArray();
 
-  console.log("session is : ", session);
-  console.log('iphone : ', iphone)
+  //console.log("session is : ", session);
+  console.log('iphone output ', iphone);
+  console.log('iphone id: ', iphone._id);
+  console.log('iphone Title: ', iphone.title);
+  console.log('iphone Title: ', iphone.price);
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
@@ -53,7 +56,7 @@ router.post("/", async (req, res) => {
     fulfillmentMessages: [{
       card: {
         title: iphone.title,
-        subtitle: "Iphone" + session,
+        subtitle: "Session : " + session,
         imageUri: "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
         buttons: [{
           text: "Buy",
