@@ -1,5 +1,8 @@
 const express = require("express");
 const connection = require("../db");
+const {
+  Iphone
+} = require('../models/mobile');
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -7,25 +10,15 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  const db = await connection();
   var colour = req.body.queryResult.parameters.colour;
   var memory = req.body.queryResult.parameters.memorygb;
   var session = req.body.session;
 
-  const result = await db
-    .collection("iphones")
-    .findOne({
-      Price: {
-        $gt: 50
-      },
-      $text: {
-        $search: colour + ' ' + memory
-      }
-    }, {
-      score: {
-        $meta: "textScore"
-      }
-    });
+  const iphone = await Iphone.findOne({
+    Price: {
+      $gt: 50
+    },
+  });
 
   /* const result = await db
     .collection("iphones")
@@ -37,6 +30,7 @@ router.post("/", async (req, res) => {
   //.toArray();
 
   console.log("session is : ", session);
+  console.log('iphone : ', iphone)
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
@@ -45,8 +39,7 @@ router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText; */
   return res.send({
-    fulfillmentText: result.Title + ' ' +
-      result.Price,
+    fulfillmentText: iphone.title + " " + iphone.price,
     /* mobile +
       " is mobile.. " +
       // memory +
@@ -57,14 +50,14 @@ router.post("/", async (req, res) => {
       " is text from user " +
       "response from Node End Point and This is " +
       intent, */
-    "fulfillmentMessages": [{
-      "card": {
-        "title": result.Title,
-        "subtitle": "Iphone" + session,
-        "imageUri": "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
-        "buttons": [{
-          "text": "Buy",
-          "postback": "https://assistant.google.com/"
+    fulfillmentMessages: [{
+      card: {
+        title: iphone.title,
+        subtitle: "Iphone" + session,
+        imageUri: "https://www.imore.com/sites/imore.com/files/styles/large/public/field/image/2014/03/topic_iphone_5.png?itok=EHmSheG0",
+        buttons: [{
+          text: "Buy",
+          postback: "https://assistant.google.com/"
         }]
       }
     }],

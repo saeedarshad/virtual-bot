@@ -2,7 +2,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const message = require("./routes/message");
 
-//const db = require('./db')();
+require('./db')();
 
 const app = express();
 
@@ -24,5 +24,3 @@ const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log("Server up and listening at", port);
 });
-
-//module.exports = db;
