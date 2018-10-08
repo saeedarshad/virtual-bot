@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
   }
 
   const iphone = await Iphone.findOne({
-    price: price,
+    price: { $gt: price + 1000, $lt: price - 1000 },
     name: mobile,
     color: colour,
     storage: memory
