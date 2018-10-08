@@ -25,5 +25,7 @@ const mobileSchema = new mongoose.Schema({
 });
 
 const Iphone = mongoose.model('Iphones', mobileSchema);
+const Samsung = mongoose.model('Samsungs', mobileSchema);
 
 exports.Iphone = Iphone;
+exports.Samsung = Samsung;

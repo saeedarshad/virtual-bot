@@ -1,7 +1,8 @@
 const express = require("express");
 const connection = require("../db");
 const {
-  Iphone
+  Iphone,
+  Samsung
 } = require('../models/mobile');
 const router = express.Router();
 
@@ -13,6 +14,7 @@ router.post("/", async (req, res) => {
   var colour = req.body.queryResult.parameters.colour;
   var memory = req.body.queryResult.parameters.memorygb;
   var session = req.body.session;
+  var speech_confidence = req.body.queryResult.speechRecognitionConfidence;
 
   const iphone = await Iphone.findOne({
     price: {
@@ -33,7 +35,7 @@ router.post("/", async (req, res) => {
   console.log('iphone output ', iphone);
   console.log('iphone id: ', iphone._id);
   console.log('iphone Title: ', iphone.title);
-  console.log('iphone Title: ', iphone.price);
+  console.log('Speech ', speech_confidence);
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
