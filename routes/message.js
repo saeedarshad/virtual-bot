@@ -1,9 +1,6 @@
 const express = require("express");
 const connection = require("../db");
-const {
-  Iphone,
-  Samsung
-} = require('../models/mobile');
+const { Iphone, Samsung } = require("../models/mobile");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -13,21 +10,19 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
-  if (intent === 'order.mobile') {
+  if (intent === "order.mobile") {
     var mobile = req.body.queryResult.parameters.mobiles;
     var colour = req.body.queryResult.parameters.colour;
     var memory = req.body.queryResult.parameters.memory_gb;
     var price = req.body.queryResult.parameters.price;
-    price = parseInt(price);
-    console.log('Type of number : ', typeof price);
-    console.log('intent : ', intent);
-    console.log('mobileee : ', mobile);
-    console.log('colourr : ', colour);
-    console.log('memory : ', memory);
-    console.log('pricee : ', price);
-
+    // price = parseInt(price);
+    console.log("Type of number : ", typeof price);
+    console.log("intent : ", intent);
+    console.log("mobileee : ", mobile);
+    console.log("colourr : ", colour);
+    console.log("memory : ", memory);
+    console.log("pricee : ", price);
   }
-
 
   const iphone = await Iphone.findOne({
     price: price,
@@ -36,12 +31,11 @@ router.post("/", async (req, res) => {
     storage: memory
   });
   if (!iphone) {
-    var result = 'Mobile not found';
+    var result = "Mobile not found";
   } else {
-    console.log('iphone output ', iphone);
+    console.log("iphone output ", iphone);
     var result = iphone.title + " " + iphone.price;
   }
-
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
