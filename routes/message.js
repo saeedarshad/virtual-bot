@@ -20,7 +20,7 @@ router.post("/", async (req, res) => {
     var price = req.body.queryResult.parameters.price;
     console.log('intent : ', intent);
     console.log('mobileee : ', mobile);
-    console.log('colourr : ', color);
+    console.log('colourr : ', colour);
     console.log('memory : ', memory);
     console.log('pricee : ', price);
 
