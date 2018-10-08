@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
     var colour = req.body.queryResult.parameters.colour;
     var memory = req.body.queryResult.parameters.memory_gb;
     var price = req.body.queryResult.parameters.price;
-    price = Number(price);
+    price = parseInt(price);
     console.log('Type of number : ', typeof price);
     console.log('intent : ', intent);
     console.log('mobileee : ', mobile);
