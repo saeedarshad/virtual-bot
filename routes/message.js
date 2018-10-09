@@ -1,6 +1,9 @@
 const express = require("express");
 const connection = require("../db");
-const { Iphone, Samsung } = require("../models/mobile");
+const {
+  Iphone,
+  Samsung
+} = require("../models/mobile");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -27,7 +30,10 @@ router.post("/", async (req, res) => {
   }
 
   const iphone = await Iphone.findOne({
-    price: { $gt: price - 1000, $lt: price + 1000 },
+    price: {
+      $gt: price - 1000,
+      $lt: price + 1000
+    },
     name: mobile,
     color: colour,
     storage: memory
@@ -36,7 +42,7 @@ router.post("/", async (req, res) => {
     var result = "Mobile not found";
   } else {
     console.log("iphone output ", iphone);
-    var result = iphone.title + " " + iphone.price;
+    var result = iphone.title + " " + iphone.price + ", Do you like it?";
   }
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
