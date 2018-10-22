@@ -48,6 +48,13 @@ router.post("/", async (req, res) => {
       } else {
         console.log("iphone output ", iphone);
         var result = iphone.title + " " + iphone.price + ", Do you like it?";
+        let emailContent =
+          "You order is " +
+          iphone.title +
+          ".price : " +
+          iphone.price +
+          ",.. Thanks";
+        sendEmail("Order Details", emailContent);
       }
     } else if (
       String(mobile)
@@ -68,13 +75,6 @@ router.post("/", async (req, res) => {
       } else {
         console.log("samsung output ", samsung);
         var result = samsung.title + " " + samsung.price + ", Do you like it?";
-        let emailContent =
-          "You order is " +
-          samsung.title +
-          ".price : " +
-          samsung.price +
-          ",.. Thanks";
-        sendEmail("Order Details", emailContent);
       }
     }
   }
