@@ -68,17 +68,16 @@ router.post("/", async (req, res) => {
       } else {
         console.log("samsung output ", samsung);
         var result = samsung.title + " " + samsung.price + ", Do you like it?";
+        let emailContent =
+          "You order is " +
+          samsung.title +
+          ".price : " +
+          samsung.price +
+          ",.. Thanks";
+        sendEmail("Order Details", emailContent);
       }
     }
   }
-
-  let emailContent =
-    "You order is " +
-    samsung.title +
-    ".price : " +
-    samsung.price +
-    ",.. Thanks";
-  sendEmail("Order Details", emailContent);
 
   function sendEmail(subject, content) {
     var transporter = nodemailer.createTransport({
