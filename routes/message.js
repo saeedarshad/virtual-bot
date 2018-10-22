@@ -1,10 +1,8 @@
 const express = require("express");
-var Sentiment = require('sentiment');
+var Sentiment = require("sentiment");
+var nodemailer = require("nodemailer");
 var sentiment = new Sentiment();
-const {
-  Iphone,
-  Samsung
-} = require("../models/mobile");
+const { Iphone, Samsung } = require("../models/mobile");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -29,9 +27,13 @@ router.post("/", async (req, res) => {
     console.log("memory : ", memory);
     console.log("pricee : ", price);
     var result = sentiment.analyze(message);
-    console.log('Sentiment analysis', result);
+    console.log("Sentiment analysis", result);
 
-    if (String(mobile).toLowerCase().includes('iphone')) {
+    if (
+      String(mobile)
+        .toLowerCase()
+        .includes("iphone")
+    ) {
       const iphone = await Iphone.findOne({
         price: {
           $gt: price - 1000,
@@ -47,7 +49,11 @@ router.post("/", async (req, res) => {
         console.log("iphone output ", iphone);
         var result = iphone.title + " " + iphone.price + ", Do you like it?";
       }
-    } else if (String(mobile).toLowerCase().includes('samsung')) {
+    } else if (
+      String(mobile)
+        .toLowerCase()
+        .includes("samsung")
+    ) {
       const samsung = await Samsung.findOne({
         price: {
           $gt: price - 1000,
@@ -66,11 +72,45 @@ router.post("/", async (req, res) => {
     }
   }
 
+  let emailContent =
+    "You order is " +
+    samsung.title +
+    ".price : " +
+    samsung.price +
+    ",.. Thanks";
+  sendEmail("Order Details", emailContent);
+
+  function sendEmail(subject, content) {
+    var transporter = nodemailer.createTransport({
+      service: "gmail",
+      auth: {
+        user: "virtualsalesbot@gmail.com",
+        pass: "dialogflow12345"
+      }
+    });
+
+    var mailOptions = {
+      from: "virtualsalesbot@gmail.com",
+      to: "m.saeedarshad95@gmail.com",
+      subject: subject,
+      text: content
+    };
+
+    transporter.sendMail(mailOptions, function(error, info) {
+      if (error) {
+        console.log(error);
+      } else {
+        console.log("Email sent: " + info.response);
+      }
+    });
+  }
+
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
   var colour = req.body.queryResult.parameters.colour;
 
    */
+
   return res.send({
     fulfillmentText: result,
     /* mobile +
