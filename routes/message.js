@@ -81,9 +81,7 @@ router.post("/", async (req, res) => {
 
   function sendEmail(subject, content) {
     var transporter = nodemailer.createTransport({
-      host: "smtp",
-      port: 587,
-      secure: false,
+      service: "gmail",
       auth: {
         user: "virtualsalesbot@gmail.com",
         pass: "dialogflow12345"
