@@ -2,7 +2,10 @@ const express = require("express");
 var Sentiment = require("sentiment");
 var nodemailer = require("nodemailer");
 var sentiment = new Sentiment();
-const { Iphone, Samsung } = require("../models/mobile");
+const {
+  Iphone,
+  Samsung
+} = require("../models/mobile");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -31,8 +34,8 @@ router.post("/", async (req, res) => {
 
     if (
       String(mobile)
-        .toLowerCase()
-        .includes("iphone")
+      .toLowerCase()
+      .includes("iphone")
     ) {
       const iphone = await Iphone.findOne({
         /* price: {
@@ -58,23 +61,24 @@ router.post("/", async (req, res) => {
       }
     } else if (
       String(mobile)
-        .toLowerCase()
-        .includes("samsung")
+      .toLowerCase()
+      .includes("samsung")
     ) {
       const samsung = await Samsung.findOne({
         /*  price: {
           $gt: price - 1000,
           $lt: price + 1000
         }, */
-        name: mobile,
-        color: colour,
-        storage: memory
+        name: mobile
+        /* ,
+                color: colour,
+                storage: memory */
       });
       if (!samsung) {
         var result = "Mobile not found";
       } else {
         console.log("samsung output ", samsung);
-        var result = samsung.title + " " + samsung.price + ", Do you like it?";
+        var result = samsung.title + " " /* + samsung.price */ + ", Do you like it?";
       }
     }
   }
@@ -95,7 +99,7 @@ router.post("/", async (req, res) => {
       text: content
     };
 
-    transporter.sendMail(mailOptions, function(error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       } else {
