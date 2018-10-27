@@ -21,6 +21,9 @@ const mobileSchema = new mongoose.Schema({
     },
     inStock: {
         type: Boolean
+    },
+    imageUrl: {
+        type: String
     }
 });
 
