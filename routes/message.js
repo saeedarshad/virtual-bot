@@ -69,7 +69,7 @@ router.post("/", async (req, res) => {
           $gt: price - 1000,
           $lt: price + 1000
         }, */
-        name: mobile
+        name: 'samsung galaxy s8'
         /* ,
                 color: colour,
                 storage: memory */
