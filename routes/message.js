@@ -59,10 +59,7 @@ router.post("/", async (req, res) => {
     } else if (
       String(mobile)
         .toLowerCase()
-        .includes("samsung") ||
-      String(mobile)
-        .toLowerCase()
-        .includes("s7")
+        .includes("samsung")
     ) {
       const samsung = await Samsung.findOne({
         /*  price: {
