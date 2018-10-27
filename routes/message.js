@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
         storage: memory
       });
       if (!iphone) {
-        var result = "Mobile not founddd";
+        var result = "Mobile not found";
       } else {
         console.log("iphone output ", iphone);
         var result = iphone.title + " " + iphone.price + ", Do you like it?";
@@ -69,16 +69,15 @@ router.post("/", async (req, res) => {
           $gt: price - 1000,
           $lt: price + 1000
         }, */
-        name: 'samsung galaxy s8'
-        /* ,
-                color: colour,
-                storage: memory */
+        name: mobile,
+        color: colour,
+        storage: memory
       });
       if (!samsung) {
         var result = "Mobile not found";
       } else {
         console.log("samsung output ", samsung);
-        var result = samsung.title + " " /* + samsung.price */ + ", Do you like it?";
+        var result = samsung.title + " " + samsung.price + ", Do you like it?";
       }
     }
   }
