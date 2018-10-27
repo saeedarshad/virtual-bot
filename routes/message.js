@@ -12,11 +12,11 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
-  if (intent === "order.mobile") {
-    var mobile = req.body.queryResult.parameters.mobiles;
+  if (intent === "mobile_order_specification") {
+    var mobile = req.body.queryResult.parameters.model;
     var colour = req.body.queryResult.parameters.colour;
-    var memory = req.body.queryResult.parameters.memory_gb;
-    var price = req.body.queryResult.parameters.price;
+    var memory = req.body.queryResult.parameters.storage;
+    // var price = req.body.queryResult.parameters.price;
     // price = parseInt(price);
     console.log("Type of number : ", typeof price);
     console.log("Type of number : ", typeof colour);
@@ -35,10 +35,10 @@ router.post("/", async (req, res) => {
         .includes("iphone")
     ) {
       const iphone = await Iphone.findOne({
-        price: {
+        /* price: {
           $gt: price - 1000,
           $lt: price + 1000
-        },
+        }, */
         name: mobile,
         color: colour,
         storage: memory
@@ -54,7 +54,7 @@ router.post("/", async (req, res) => {
           ".price : " +
           iphone.price +
           ",.. Thanks";
-        sendEmail("Order Details", emailContent);
+        //sendEmail("Order Details", emailContent);
       }
     } else if (
       String(mobile)
@@ -62,10 +62,10 @@ router.post("/", async (req, res) => {
         .includes("samsung")
     ) {
       const samsung = await Samsung.findOne({
-        price: {
+        /*  price: {
           $gt: price - 1000,
           $lt: price + 1000
-        },
+        }, */
         name: mobile,
         color: colour,
         storage: memory
