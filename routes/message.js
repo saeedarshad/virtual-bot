@@ -25,7 +25,7 @@ router.post("/", async (req, res) => {
     console.log("mobileee : ", mobile);
     console.log("colourr : ", colour);
     console.log("memory : ", memory);
-    console.log("pricee : ", price);
+    // console.log("pricee : ", price);
     var result = sentiment.analyze(message);
     console.log("Sentiment analysis", result);
 
