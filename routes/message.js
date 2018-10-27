@@ -47,7 +47,7 @@ router.post("/", async (req, res) => {
         storage: memory
       });
       if (!iphone) {
-        var result = "Mobile not found";
+        var result = "Mobile not founddd";
       } else {
         console.log("iphone output ", iphone);
         var result = iphone.title + " " + iphone.price + ", Do you like it?";
