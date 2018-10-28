@@ -98,7 +98,7 @@ router.post("/", async (req, res) => {
     var mobile = req.body.queryResult.outputContexts[1].model;
     var storage = req.body.queryResult.outputContexts[1].storage;
     var paymentMethod = req.body.queryResult.outputContexts[1].payment_method;
-    console.log('output context : ', req.body.queryResult.outputContexts)
+    console.log('output context : ', req.body.queryResult.outputContexts[1])
     var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile;
     sendEmail(subject, content, receiver);
     result = 'Email Sent'
