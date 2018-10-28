@@ -134,7 +134,7 @@ router.post("/", async (req, res) => {
       {
         card: {
           title: mobile,
-          subtitle: result,
+          subtitle: imageUri,
           imageUri: imageUri,
           buttons: []
         }
