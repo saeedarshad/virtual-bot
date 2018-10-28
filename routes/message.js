@@ -15,6 +15,7 @@ router.get("/", (req, res) => {
 router.post("/", async (req, res) => {
   var intent = req.body.queryResult.intent.displayName;
   var message = req.body.queryResult.queryText;
+  console.log('Intent name : ', intent)
   if (intent === "mobile_order_specification") {
     var mobile = req.body.queryResult.parameters.model;
     var colour = req.body.queryResult.parameters.colour;
