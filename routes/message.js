@@ -93,11 +93,11 @@ router.post("/", async (req, res) => {
   if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
     var subject = 'Order Details';
-    var colour = req.body.queryResult.queryText.outputContexts[1].colour;
-    var mobile = req.body.queryResult.queryText.outputContexts[1].model;
-    var storage = req.body.queryResult.queryText.outputContexts[1].storage;
-    var paymentMethod = req.body.queryResult.queryText.outputContexts[1].payment_method;
-    console.log('output context : ', req.body.queryResult.queryText.outputContexts)
+    var colour = req.body.queryResult.outputContexts[1].colour;
+    var mobile = req.body.queryResult.outputContexts[1].model;
+    var storage = req.body.queryResult.outputContexts[1].storage;
+    var paymentMethod = req.body.queryResult.outputContexts[1].payment_method;
+    console.log('output context : ', req.body.queryResult.outputContexts)
     var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile;
     sendEmail(subject, content, receiver);
     result = 'Email Sent'
