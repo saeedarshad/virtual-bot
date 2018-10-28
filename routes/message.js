@@ -99,10 +99,10 @@ router.post("/", async (req, res) => {
     var storage = req.body.queryResult.outputContexts[2].parameters.storage;
     var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
     console.log('output context : ', req.body.queryResult.outputContexts[2])
-    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile + 'in ' + colour + ' colour with ' + storage + ' storage';
+    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
     sendEmail(subject, content, receiver);
-    result = '';
-    mobile = 'Email Sent to ' + receiver;
+    result = receiver;
+    mobile = 'Email Sent to ';
     imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoS83usvxagVAfmgo2f9cQW8e6ds6Yp25xCqz96Io8GQVrevGZg'
   } else {
     console.log('nothing match')
