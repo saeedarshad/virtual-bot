@@ -90,31 +90,19 @@ router.post("/", async (req, res) => {
       }
     }
   }
-
-  function sendEmail(subject, content) {
-    var transporter = nodemailer.createTransport({
-      service: "gmail",
-      auth: {
-        user: "virtualsalesbot@gmail.com",
-        pass: "dialogflow12345"
-      }
-    });
-
-    var mailOptions = {
-      from: "virtualsalesbot@gmail.com",
-      to: "m.saeedarshad95@gmail.com",
-      subject: subject,
-      text: content
-    };
-
-    transporter.sendMail(mailOptions, function (error, info) {
-      if (error) {
-        console.log(error);
-      } else {
-        console.log("Email sent: " + info.response);
-      }
-    });
+  if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
+    var receiver = message;
+    var subject = 'Order Details';
+    var colour = req.body.queryResult.queryText.outputContexts[1].colour;
+    var mobile = req.body.queryResult.queryText.outputContexts[1].model;
+    var storage = req.body.queryResult.queryText.outputContexts[1].storage;
+    var paymentMethod = req.body.queryResult.queryText.outputContexts[1].payment_method;
+    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile;
+    sendEmail(subject, content, receiver);
+    result = 'Email Sent'
   }
+
+
 
   /* var mobile = req.body.queryResult.parameters.mobiles;
   //var memory = req.body.queryResult.parameters.memorygb;
@@ -149,5 +137,31 @@ router.post("/", async (req, res) => {
     }
   });
 });
+
+function sendEmail(subject, content, receiver) {
+  var transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "virtualsalesbot@gmail.com",
+      pass: "dialogflow12345"
+    }
+  });
+
+  var mailOptions = {
+    from: "virtualsalesbot@gmail.com",
+    to: receiver,
+    subject: subject,
+    //text: content
+    html: content
+  };
+
+  transporter.sendMail(mailOptions, function (error, info) {
+    if (error) {
+      console.log(error);
+    } else {
+      console.log("Email sent: " + info.response);
+    }
+  });
+}
 
 module.exports = router;
