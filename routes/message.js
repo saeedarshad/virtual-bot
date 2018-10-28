@@ -81,6 +81,7 @@ router.post("/", async (req, res) => {
       } else {
         console.log("samsung output ", samsung);
         imageUri = samsung.imageUri;
+        console.log("image uri", imageUri);
         var result =
           samsung.title + ". Price :  " + samsung.price + ", Do you like it?";
       }
@@ -134,7 +135,7 @@ router.post("/", async (req, res) => {
       {
         card: {
           title: mobile,
-          subtitle: imageUri,
+          subtitle: result,
           imageUri: imageUri,
           buttons: []
         }
