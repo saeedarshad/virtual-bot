@@ -101,9 +101,9 @@ router.post("/", async (req, res) => {
     console.log('output context : ', req.body.queryResult.outputContexts[2])
     var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile + 'in ' + colour + ' colour with ' + storage + ' storage';
     sendEmail(subject, content, receiver);
-    result = 'Email Sent';
-    title = '';
-    imageUrl = ''
+    result = '';
+    mobile = 'Email Sent to ' + receiver;
+    imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoS83usvxagVAfmgo2f9cQW8e6ds6Yp25xCqz96Io8GQVrevGZg'
   } else {
     console.log('nothing match')
   }
