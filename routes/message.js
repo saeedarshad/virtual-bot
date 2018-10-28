@@ -2,7 +2,10 @@ const express = require("express");
 var Sentiment = require("sentiment");
 var nodemailer = require("nodemailer");
 var sentiment = new Sentiment();
-const { Iphone, Samsung } = require("../models/mobile");
+const {
+  Iphone,
+  Samsung
+} = require("../models/mobile");
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -28,12 +31,12 @@ router.post("/", async (req, res) => {
     // console.log("pricee : ", price);
     var result = sentiment.analyze(message);
     console.log("Sentiment analysis", result);
-    var imageUri = null;
+    var imageUrl = null;
 
     if (
       String(mobile)
-        .toLowerCase()
-        .includes("iphone")
+      .toLowerCase()
+      .includes("iphone")
     ) {
       const iphone = await Iphone.findOne({
         /* price: {
@@ -46,12 +49,12 @@ router.post("/", async (req, res) => {
       });
       if (!iphone) {
         var result = "Mobile not found";
-        imageUri =
+        imageUrl =
           "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
       } else {
         console.log("iphone output ", iphone);
         var result = iphone.title + " " + iphone.price + ", Do you like it?";
-        imageUri = iphone.imageUri;
+        imageUrl = iphone.imageUrl;
         let emailContent =
           "You order is " +
           iphone.title +
@@ -62,8 +65,8 @@ router.post("/", async (req, res) => {
       }
     } else if (
       String(mobile)
-        .toLowerCase()
-        .includes("samsung")
+      .toLowerCase()
+      .includes("samsung")
     ) {
       const samsung = await Samsung.findOne({
         /*  price: {
@@ -76,12 +79,12 @@ router.post("/", async (req, res) => {
       });
       if (!samsung) {
         var result = "Mobile not found";
-        imageUri =
+        imageUrl =
           "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
       } else {
         console.log("samsung output ", samsung);
-        imageUri = samsung.imageUri;
-        console.log("image uri", imageUri);
+        imageUrl = samsung.imageUrl;
+        console.log("image uri", imageUrl);
         var result =
           samsung.title + ". Price :  " + samsung.price + ", Do you like it?";
       }
@@ -104,7 +107,7 @@ router.post("/", async (req, res) => {
       text: content
     };
 
-    transporter.sendMail(mailOptions, function(error, info) {
+    transporter.sendMail(mailOptions, function (error, info) {
       if (error) {
         console.log(error);
       } else {
@@ -131,16 +134,14 @@ router.post("/", async (req, res) => {
       " is text from user " +
       "response from Node End Point and This is " +
       intent, */
-    fulfillmentMessages: [
-      {
-        card: {
-          title: mobile,
-          subtitle: result,
-          imageUri: imageUri,
-          buttons: []
-        }
+    fulfillmentMessages: [{
+      card: {
+        title: mobile,
+        subtitle: result,
+        imageUri: imageUrl,
+        buttons: []
       }
-    ],
+    }],
     source: "virtual sales bot",
     payload: {
       name: "saeed",
