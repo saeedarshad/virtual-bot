@@ -101,6 +101,8 @@ router.post("/", async (req, res) => {
     var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile;
     sendEmail(subject, content, receiver);
     result = 'Email Sent'
+  } else {
+    console.log('nothing match')
   }
 
 
