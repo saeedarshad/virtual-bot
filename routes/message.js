@@ -53,8 +53,7 @@ router.post("/", async (req, res) => {
       imageUrl = mobile.imageUrl;
     }
 
-  }
-  if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
+  } else if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
     var subject = 'Order Details';
     var colour = req.body.queryResult.outputContexts[2].parameters.colour;
@@ -93,7 +92,7 @@ router.post("/", async (req, res) => {
       intent, */
     fulfillmentMessages: [{
       card: {
-        title: mobile,
+        title: mobile_model,
         subtitle: result,
         imageUri: imageUrl,
         buttons: []
