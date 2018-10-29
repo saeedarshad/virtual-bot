@@ -18,7 +18,7 @@ router.post("/", async (req, res) => {
   var message = req.body.queryResult.queryText;
   console.log('Intent name : ', intent)
   if (intent === "mobile_order_specification") {
-    var mobile = req.body.queryResult.parameters.model;
+    var mobile_model = req.body.queryResult.parameters.model;
     var colour = req.body.queryResult.parameters.colour;
     var memory = req.body.queryResult.parameters.storage;
     // var price = req.body.queryResult.parameters.price;
@@ -27,7 +27,7 @@ router.post("/", async (req, res) => {
     console.log("Type of number : ", typeof colour);
     console.log("Type of number : ", typeof memory);
     console.log("intent : ", intent);
-    console.log("mobileee : ", mobile);
+    console.log("mobileee : ", mobile_model);
     console.log("colourr : ", colour);
     console.log("memory : ", memory);
     // console.log("pricee : ", price);
@@ -39,7 +39,7 @@ router.post("/", async (req, res) => {
         $gt: price - 1000,
         $lt: price + 1000
       }, */
-      name: mobile,
+      name: mobile_model,
       color: colour,
       storage: memory
     });
@@ -48,7 +48,7 @@ router.post("/", async (req, res) => {
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
     } else {
-      console.log("Mobile Output ", iphone);
+      console.log("Mobile Output ", mobile);
       var result = mobile.title + " " + mobile.price + ", Do you like it?";
       imageUrl = mobile.imageUrl;
     }
@@ -58,11 +58,11 @@ router.post("/", async (req, res) => {
     var receiver = message;
     var subject = 'Order Details';
     var colour = req.body.queryResult.outputContexts[2].parameters.colour;
-    var mobile = req.body.queryResult.outputContexts[2].parameters.model;
+    var mobile_model = req.body.queryResult.outputContexts[2].parameters.model;
     var storage = req.body.queryResult.outputContexts[2].parameters.storage;
     var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
     console.log('output context : ', req.body.queryResult.outputContexts[2])
-    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
+    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile_model + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
     sendEmail(subject, content, receiver);
     result = receiver;
     mobile = 'Email Sent to ';
