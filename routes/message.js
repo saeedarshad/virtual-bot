@@ -4,7 +4,8 @@ var nodemailer = require("nodemailer");
 var sentiment = new Sentiment();
 const {
   Iphone,
-  Samsung
+  Samsung,
+  Mobile
 } = require("../models/mobile");
 const router = express.Router();
 
@@ -33,63 +34,25 @@ router.post("/", async (req, res) => {
     var result = sentiment.analyze(message);
     console.log("Sentiment analysis", result);
     var imageUrl = null;
-
-    if (
-      String(mobile)
-      .toLowerCase()
-      .includes("iphone")
-    ) {
-      const iphone = await Iphone.findOne({
-        /* price: {
-          $gt: price - 1000,
-          $lt: price + 1000
-        }, */
-        name: mobile,
-        color: colour,
-        storage: memory
-      });
-      if (!iphone) {
-        var result = "Mobile not found";
-        imageUrl =
-          "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
-      } else {
-        console.log("iphone output ", iphone);
-        var result = iphone.title + " " + iphone.price + ", Do you like it?";
-        imageUrl = iphone.imageUrl;
-        let emailContent =
-          "You order is " +
-          iphone.title +
-          ".price : " +
-          iphone.price +
-          ",.. Thanks";
-        //sendEmail("Order Details", emailContent);
-      }
-    } else if (
-      String(mobile)
-      .toLowerCase()
-      .includes("samsung")
-    ) {
-      const samsung = await Samsung.findOne({
-        /*  price: {
-          $gt: price - 1000,
-          $lt: price + 1000
-        }, */
-        name: mobile,
-        color: colour,
-        storage: memory
-      });
-      if (!samsung) {
-        var result = "Mobile not found";
-        imageUrl =
-          "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
-      } else {
-        console.log("samsung output ", samsung);
-        imageUrl = samsung.imageUrl;
-        console.log("image uri", imageUrl);
-        var result =
-          samsung.title + ". Price :  " + samsung.price + ", Do you like it?";
-      }
+    const mobile = await Mobile.findOne({
+      /* price: {
+        $gt: price - 1000,
+        $lt: price + 1000
+      }, */
+      name: mobile,
+      color: colour,
+      storage: memory
+    });
+    if (!Mobile) {
+      var result = "Mobile not found";
+      imageUrl =
+        "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
+    } else {
+      console.log("Mobile Output ", iphone);
+      var result = mobile.title + " " + mobile.price + ", Do you like it?";
+      imageUrl = mobile.imageUrl;
     }
+
   }
   if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
