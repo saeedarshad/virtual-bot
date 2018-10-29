@@ -1,4 +1,5 @@
 const express = require("express");
+var validator = require('validator');
 var Sentiment = require("sentiment");
 var nodemailer = require("nodemailer");
 var sentiment = new Sentiment();
@@ -55,17 +56,23 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
-    var subject = 'Order Details';
-    var colour = req.body.queryResult.outputContexts[2].parameters.colour;
-    var mobile_model = req.body.queryResult.outputContexts[2].parameters.model;
-    var storage = req.body.queryResult.outputContexts[2].parameters.storage;
-    var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
-    console.log('output context : ', req.body.queryResult.outputContexts[2])
-    var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile_model + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
-    sendEmail(subject, content, receiver);
-    result = receiver;
-    mobile = 'Email Sent to ';
-    imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoS83usvxagVAfmgo2f9cQW8e6ds6Yp25xCqz96Io8GQVrevGZg'
+    if (validator.isEmail(message)) {
+      var subject = 'Order Details';
+      var colour = req.body.queryResult.outputContexts[2].parameters.colour;
+      var mobile_model = req.body.queryResult.outputContexts[2].parameters.model;
+      var storage = req.body.queryResult.outputContexts[2].parameters.storage;
+      var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
+      console.log('output context : ', req.body.queryResult.outputContexts[2])
+      var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile_model + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
+      sendEmail(subject, content, receiver);
+      result = receiver;
+      mobile_model = 'Email Sent to ';
+      imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoS83usvxagVAfmgo2f9cQW8e6ds6Yp25xCqz96Io8GQVrevGZg'
+    } else {
+      mobile_model = 'Invalid Email!!';
+      result = 'please enter valid email';
+    }
+
   } else {
     console.log('nothing match')
   }

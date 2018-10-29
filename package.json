@@ -18,6 +18,7 @@
     "express": "^4.16.3",
     "mongoose": "^5.3.1",
     "nodemailer": "^4.6.8",
-    "sentiment": "^5.0.1"
+    "sentiment": "^5.0.1",
+    "validator": "^10.8.0"
   }
 }
