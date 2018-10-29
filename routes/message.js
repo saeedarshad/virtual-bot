@@ -62,8 +62,17 @@ router.post("/", async (req, res) => {
       var mobile_model = req.body.queryResult.outputContexts[2].parameters.model;
       var storage = req.body.queryResult.outputContexts[2].parameters.storage;
       var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
+      const mobile = await Mobile.findOne({
+        /* price: {
+          $gt: price - 1000,
+          $lt: price + 1000
+        }, */
+        name: mobile_model,
+        color: colour,
+        storage: storage
+      });
       console.log('output context : ', req.body.queryResult.outputContexts[2])
-      var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile_model + '<br><h3>Colour : </h3>' + colour + ' <br><h3>Storage  : </h3>' + storage;
+      var content = '<h1>Here is Your order Details!</h1><br><br><h3>Mobile : </h3>' + mobile_model + '<h3>Colour : </h3>' + colour + '<h3>Storage  : </h3>' + storage + '<h3>Price  : </h3>' + mobile.price + '<br><img src=' + mobile.imageUrl + '>';
       sendEmail(subject, content, receiver);
       result = receiver;
       mobile_model = 'Email Sent to ';
