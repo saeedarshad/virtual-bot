@@ -42,7 +42,8 @@ router.post("/", async (req, res) => {
       }, */
       name: mobile_model,
       color: colour,
-      storage: memory
+      storage: memory,
+      inStock: true
     });
     if (!Mobile) {
       var result = "Mobile not found";
@@ -62,6 +63,7 @@ router.post("/", async (req, res) => {
       var mobile_model = req.body.queryResult.outputContexts[2].parameters.model;
       var storage = req.body.queryResult.outputContexts[2].parameters.storage;
       var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
+
       const mobile = await Mobile.findOne({
         /* price: {
           $gt: price - 1000,
@@ -69,8 +71,22 @@ router.post("/", async (req, res) => {
         }, */
         name: mobile_model,
         color: colour,
-        storage: storage
+        storage: storage,
+        inStock: true
       });
+
+      //Updated the db and marked the item as sold
+      await Mobile.update({
+        name: mobile_model,
+        color: colour,
+        storage: storage,
+        inStock: true
+      }, {
+        $set: {
+          inStock: false
+        }
+      });
+
       console.log('output context : ', req.body.queryResult.outputContexts[2])
       var content = '<h1>Here is Your order Details!</h1><br><h3>Mobile :' + mobile_model + '</h3><h3>Colour : ' + colour + '</h3><h3>Storage  :' + storage + ' </h3><h3>Price  : ' + mobile.price + '</h3><br><img src=' + mobile.imageUrl + '>';
       sendEmail(subject, content, receiver);

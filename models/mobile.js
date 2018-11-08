@@ -10,7 +10,7 @@ const mobileSchema = new mongoose.Schema({
     price: {
         type: Number
     },
-    discription: {
+    description: {
         type: String
     },
     storage: {
