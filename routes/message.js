@@ -76,7 +76,7 @@ router.post("/", async (req, res) => {
       });
 
       //Updated the db and marked the item as sold
-      await Mobile.update({
+      await Mobile.updateOne({
         name: mobile_model,
         color: colour,
         storage: storage,
