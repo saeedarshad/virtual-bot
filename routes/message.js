@@ -6,9 +6,12 @@ var sentiment = new Sentiment();
 const {
   Iphone,
   Samsung,
-  Mobile,
-  Order
+  Mobile
 } = require("../models/mobile");
+const {
+  Order
+} = require("../models/order");
+
 const router = express.Router();
 
 router.get("/", (req, res) => {
@@ -58,7 +61,9 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
-    var userID = req.body.session;
+    var str = req.body.session;
+    var userid = str.split("/");
+    var userID = userid[4];
     console.log('User ID : ', userID);
 
     if (validator.isEmail(message)) {
