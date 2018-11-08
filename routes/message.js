@@ -98,10 +98,11 @@ router.post("/", async (req, res) => {
 
       //Add order in order Document
 
-      await Order.insertOne({
+      const order = new Order({
         userId: userID,
         productId: mobile._id
       });
+      await order.save();
 
 
       console.log('output context : ', req.body.queryResult.outputContexts[2])
