@@ -59,6 +59,7 @@ router.post("/", async (req, res) => {
   } else if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
     var userID = req.body.session;
+    console.log('User ID : ', userID);
 
     if (validator.isEmail(message)) {
       var subject = 'Order Details';
