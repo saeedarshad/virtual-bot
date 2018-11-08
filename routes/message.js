@@ -55,7 +55,7 @@ router.post("/", async (req, res) => {
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
     } else {
       console.log("Mobile Output ", mobile);
-      var result = mobile.title + " " + mobile.price + ", Do you like it?";
+      var result = mobile.title + " at price : " + mobile.price + ", Do you like it?";
       imageUrl = mobile.imageUrl;
     }
 
