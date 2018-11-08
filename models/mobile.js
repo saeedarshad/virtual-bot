@@ -10,6 +10,9 @@ const mobileSchema = new mongoose.Schema({
     price: {
         type: Number
     },
+    thresholdPrice: {
+        type: Number
+    },
     description: {
         type: String
     },

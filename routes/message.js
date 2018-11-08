@@ -104,9 +104,9 @@ router.post("/", async (req, res) => {
       });
       await order.save();
 
-
+      var disountedPrice = mobile.price - 500;
       console.log('output context : ', req.body.queryResult.outputContexts[2])
-      var content = '<h1>Here is Your order Details!</h1><br><h3>Mobile :' + mobile_model + '</h3><h3>Colour : ' + colour + '</h3><h3>Storage  :' + storage + ' </h3><h3>Price  : ' + mobile.price + '</h3><br><img src=' + mobile.imageUrl + '>';
+      var content = '<h1>Here is Your order Details!</h1><br><h2>We give you 500 discount.Happy Shopping!:)</h2><h3>Mobile :' + mobile_model + '</h3><h3>Colour : ' + colour + '</h3><h3>Storage  :' + storage + ' </h3><h3>Price  : ' + disountedPrice + '</h3><br><img src=' + mobile.imageUrl + '>';
       sendEmail(subject, content, receiver);
       result = receiver;
       mobile_model = 'Email Sent to ';
