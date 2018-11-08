@@ -6,7 +6,8 @@ var sentiment = new Sentiment();
 const {
   Iphone,
   Samsung,
-  Mobile
+  Mobile,
+  Order
 } = require("../models/mobile");
 const router = express.Router();
 
@@ -57,6 +58,8 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'mobile_order_specification_yes_custom_custom_custom') {
     var receiver = message;
+    var userID = req.body.session;
+
     if (validator.isEmail(message)) {
       var subject = 'Order Details';
       var colour = req.body.queryResult.outputContexts[2].parameters.colour;
@@ -86,6 +89,14 @@ router.post("/", async (req, res) => {
           inStock: false
         }
       });
+
+      //Add order in order Document
+
+      await Order.insertOne({
+        userId: userID,
+        productId: mobile._id
+      });
+
 
       console.log('output context : ', req.body.queryResult.outputContexts[2])
       var content = '<h1>Here is Your order Details!</h1><br><h3>Mobile :' + mobile_model + '</h3><h3>Colour : ' + colour + '</h3><h3>Storage  :' + storage + ' </h3><h3>Price  : ' + mobile.price + '</h3><br><img src=' + mobile.imageUrl + '>';
