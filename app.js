@@ -19,6 +19,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/message", message);
+app.use("/webhook", webhook);
 
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
