@@ -257,7 +257,7 @@ function handleMessage(message, sender) {
 }
 
 
-function handleCardMessages(messages, sender) {
+/* function handleCardMessages(messages, sender) {
 
 	let elements = [];
 	for (var m = 0; m < messages.length; m++) {
@@ -292,7 +292,7 @@ function handleCardMessages(messages, sender) {
 		elements.push(element);
 	}
 	sendGenericMessage(sender, elements);
-}
+} */
 
 function handleDialogFlowResponse(sender, response) {
 	//Db Response will not handle here
