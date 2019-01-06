@@ -80,6 +80,7 @@ router.post("/", async (req, res) => {
     console.log("laptop modelll : ", laptop_model);
     console.log("colourr : ", colour);
     console.log("memory : ", memory);
+    console.log("Ram : ", ram);
     // console.log("pricee : ", price);
     //var result = sentiment.analyze(message);
     //console.log("Sentiment analysis", result);
