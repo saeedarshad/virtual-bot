@@ -101,7 +101,7 @@ router.post("/", async (req, res) => {
       storage: memory,
       ram: ram,
       inStock: true,
-      threshold: laptop.threshold,
+      thresholdPrice: laptop.thresholdPrice,
       imageUrl: laptop.imageUrl,
       price: laptop.price
     });
@@ -238,10 +238,15 @@ router.post("/", async (req, res) => {
   } else if (intent === 'laptop_order_negotiation_step2') {
 
 
-    const laptopTemp = await Laptop_temp.findOne({});
+    const laptopTemp = await Laptop_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
 
     var discounted_price = laptopTemp.price * 0.5;
-
+    console.log('Price : ', laptopTemp.price);
+    console.log('Discountedddd : ', discounted_price);
   } else {
     console.log('nothing match')
   }
