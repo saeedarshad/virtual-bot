@@ -11,7 +11,8 @@ const {
 } = require("../models/mobile");
 
 const {
-  Laptop
+  Laptop,
+  Laptop_temp
 } = require("../models/laptop");
 
 const {
@@ -86,16 +87,25 @@ router.post("/", async (req, res) => {
     //console.log("Sentiment analysis", result);
     var imageUrl = null;
     const laptop = await Laptop.findOne({
-      /* price: {
-        $gt: price - 1000,
-        $lt: price + 1000
-      }, */
       name: laptop_model,
       color: colour,
       storage: memory,
       ram: ram,
       inStock: true
     });
+
+    const laptop_temp = new Laptop_temp({
+      laptop
+      /*  name: laptop_model,
+       title: laptop.title,
+       color: colour,
+       storage: memory,
+       ram: ram,
+       inStock: true,
+       threshold: laptop.threshold */
+    });
+    await laptop_temp.save();
+
     console.log("Laptop Output ", laptop);
     if (!laptop) {
       var result = "Laptop not found";
@@ -225,13 +235,6 @@ router.post("/", async (req, res) => {
     }
 
   } else if (intent === 'laptop_order_negotiation_step2') {
-
-    var colour = req.body.queryResult.outputContexts[0].parameters.colour;
-    var laptop_model = req.body.queryResult.outputContexts[0].parameters.model1;
-    var storage = req.body.queryResult.outputContexts[0].parameters.storage;
-    var ram = req.body.queryResult.outputContexts[0].parameters.ram;
-    console.log('Outputtttt :', req.body.queryResult.outputContexts)
-    console.log('Rammmmmmm : ', ram);
 
 
     const laptop = await Laptop.findOne({
