@@ -96,7 +96,7 @@ router.post("/", async (req, res) => {
       ram: ram,
       inStock: true
     });
-    if (!laptop) {
+    if (!Laptop) {
       var result = "Laptop not found";
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
