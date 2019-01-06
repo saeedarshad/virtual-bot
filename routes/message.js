@@ -253,11 +253,7 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'laptop_order_negotiation_step2') {
 
-    const laptopTemp = await Laptop_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const laptopTemp = await Laptop_temp.findOne({}).sort('-date');
 
     var randomNumber = Math.floor((Math.random() * 300) + 200);
     var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
@@ -269,11 +265,7 @@ router.post("/", async (req, res) => {
     console.log('Discountedddd : ', discounted_price);
   } else if (intent === 'laptop_order_negotiation_step3') {
 
-    const laptopTemp = await Laptop_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const laptopTemp = await Laptop_temp.findOne({}).sort('-date');
 
     /*  var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
      var temp = avg + Math.sqrt(avg / 2);
@@ -284,11 +276,7 @@ router.post("/", async (req, res) => {
     console.log('Discountedddd : ', discounted_price);
   } else if (intent === 'laptop_order_negotiation_step4') {
 
-    const laptopTemp = await Laptop_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const laptopTemp = await Laptop_temp.findOne({}).sort('-date');
 
     var randomNumber = Math.floor((Math.random() * 300) + 200);
     var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
@@ -300,11 +288,7 @@ router.post("/", async (req, res) => {
     console.log('Discountedddd : ', discounted_price);
   } else if (intent === 'mobile_order_negotiation_step2') {
 
-    const mobileTemp = await Mobile_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const mobileTemp = await Mobile_temp.findOne({}).sort('-date');
 
     var randomNumber = Math.floor((Math.random() * 300) + 200);
     var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
@@ -316,11 +300,7 @@ router.post("/", async (req, res) => {
     console.log('Discountedddd : ', discounted_price);
   } else if (intent === 'mobile_order_negotiation_step3') {
 
-    const mobileTemp = await Mobile_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const mobileTemp = await Mobile_temp.findOne({}).sort('-date');
 
     /*  var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
      var temp = avg + Math.sqrt(avg / 2);
@@ -331,11 +311,7 @@ router.post("/", async (req, res) => {
     console.log('Discountedddd : ', discounted_price);
   } else if (intent === 'mobile_order_negotiation_step4') {
 
-    const mobileTemp = await Mobile_temp.findOne({}, {}, {
-      sort: {
-        'created_at': -1
-      }
-    });
+    const mobileTemp = await Mobile_temp.findOne({}).sort('-date');
 
     var randomNumber = Math.floor((Math.random() * 300) + 200);
     var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
