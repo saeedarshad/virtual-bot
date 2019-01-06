@@ -95,14 +95,15 @@ router.post("/", async (req, res) => {
     });
 
     const laptop_temp = new Laptop_temp({
-      laptop
-      /* name: laptop_model,
+      name: laptop_model,
       title: laptop.title,
       color: colour,
       storage: memory,
       ram: ram,
       inStock: true,
-      threshold: laptop.threshold */
+      threshold: laptop.threshold,
+      imageUrl: laptop.imageUrl,
+      price: laptop.price
     });
     await laptop_temp.save();
 
@@ -237,19 +238,9 @@ router.post("/", async (req, res) => {
   } else if (intent === 'laptop_order_negotiation_step2') {
 
 
-    const laptop = await Laptop.findOne({
-      /* price: {
-        $gt: price - 1000,
-        $lt: price + 1000
-      }, */
-      name: laptop_model,
-      color: colour,
-      storage: storage,
-      ram: ram,
-      inStock: true
-    });
+    const laptopTemp = await Laptop_temp.findOne({});
 
-    var discounted_price = laptop.price * 0.5;
+    var discounted_price = laptopTemp.price * 0.5;
 
   } else {
     console.log('nothing match')
