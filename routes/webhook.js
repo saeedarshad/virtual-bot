@@ -87,8 +87,6 @@ router.post('/', function (req, res) {
 		// Iterate over each entry
 		// There may be multiple if batched
 		data.entry.forEach(function (pageEntry) {
-			var pageID = pageEntry.id;
-			var timeOfEvent = pageEntry.time;
 
 			// Iterate over each messaging event
 			pageEntry.messaging.forEach(function (messagingEvent) {
@@ -105,6 +103,7 @@ router.post('/', function (req, res) {
 });
 
 
+//All the message received here
 function receivedMessage(event) {
 
 	//Extract data from request
@@ -141,8 +140,6 @@ function receivedMessage(event) {
 	if (messageText) {
 		//send message to api.ai
 		sendToDialogFlow(senderID, messageText);
-	} else if (messageAttachments) {
-		handleMessageAttachments(messageAttachments, senderID);
 	}
 }
 
@@ -152,6 +149,8 @@ function receivedMessage(event) {
 	sendTextMessage(senderID, "Attachment received. Thank you.");
 } */
 
+//If user select quick reply button instead of writing a text
+
 function handleQuickReply(senderID, quickReply, messageId) {
 	var quickReplyPayload = quickReply.payload;
 	//console.log("Quick reply for message %s with payload %s", messageId, quickReplyPayload);
@@ -159,12 +158,13 @@ function handleQuickReply(senderID, quickReply, messageId) {
 	sendToDialogFlow(senderID, quickReplyPayload);
 }
 
+//Handle message send by page to itself
 function handleEcho(messageId, appId, metadata) {
 	// Just logging message echoes to console
 	console.log("Received echo for message %s and app %d with metadata %s", messageId, appId, metadata);
 }
 
-function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
+/* function handleDialogFlowAction(sender, action, messages, contexts, parameters) {
 	switch (action) {
 		case 'initial-query':
 			let replies = [{
@@ -227,8 +227,9 @@ function handleDialogFlowAction(sender, action, messages, contexts, parameters) 
 			//unhandled action, just send back the text
 			handleMessage(messages, sender);
 	}
-}
+} */
 
+//Check if the message send to user is text or quick reply
 function handleMessage(message, sender) {
 	switch (message.message) {
 		case "text": //text
@@ -294,6 +295,7 @@ function handleMessage(message, sender) {
 	sendGenericMessage(sender, elements);
 } */
 
+//Handle response fronm dialogflow
 function handleDialogFlowResponse(sender, response) {
 	//Db Response will not handle here
 	let responseText = response.fulfillmentMessages.fulfillmentText;
@@ -305,9 +307,7 @@ function handleDialogFlowResponse(sender, response) {
 
 	sendTypingOff(sender);
 
-	if (isDefined(action)) {
-		handleDialogFlowAction(sender, action, messages, contexts, parameters);
-	} else if (isDefined(messages)) {
+	if (isDefined(messages)) {
 		handleMessage(messages, sender);
 	} else if (responseText == '' && !isDefined(action)) {
 		//dialogflow could not evaluate input.
@@ -317,6 +317,7 @@ function handleDialogFlowResponse(sender, response) {
 	}
 }
 
+//making a call to dialogflow api
 async function sendToDialogFlow(sender, textString, params) {
 
 	sendTypingOn(sender); //Show typing symbol on bot
@@ -355,7 +356,7 @@ async function sendToDialogFlow(sender, textString, params) {
 }
 
 
-
+//Send Simple text message
 
 function sendTextMessage(recipientId, text) {
 	var messageData = {
@@ -484,6 +485,7 @@ function sendTypingOff(recipientId) {
  * get the message id in a response 
  *
  */
+//Sending DAta to messanger
 function callSendAPI(messageData) {
 	request({
 		uri: 'https://graph.facebook.com/v2.6/me/messages',
@@ -512,7 +514,7 @@ function callSendAPI(messageData) {
 }
 
 //Validate if request come from right application
-function verifyRequestSignature(req, res, buf) {
+/* function verifyRequestSignature(req, res, buf) {
 	var signature = req.headers["x-hub-signature"];
 
 	if (!signature) {
@@ -530,7 +532,7 @@ function verifyRequestSignature(req, res, buf) {
 			throw new Error("Couldn't validate the request signature.");
 		}
 	}
-}
+} */
 
 function isDefined(obj) {
 	if (typeof obj == 'undefined') {
