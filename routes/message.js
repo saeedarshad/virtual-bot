@@ -224,6 +224,30 @@ router.post("/", async (req, res) => {
       result = 'please enter valid email';
     }
 
+  } else if (intent === 'laptop_order_negotiation_step2') {
+
+    var colour = req.body.queryResult.outputContexts[2].parameters.colour;
+    var laptop_model = req.body.queryResult.outputContexts[2].parameters.model1;
+    var storage = req.body.queryResult.outputContexts[2].parameters.storage;
+    var ram = req.body.queryResult.outputContexts[2].parameters.ram;
+    console.log('Outputtttt :', req.body.queryResult.outputContexts)
+    console.log('Rammmmmmm : ', ram);
+
+
+    const laptop = await Laptop.findOne({
+      /* price: {
+        $gt: price - 1000,
+        $lt: price + 1000
+      }, */
+      name: laptop_model,
+      color: colour,
+      storage: storage,
+      ram: ram,
+      inStock: true
+    });
+
+    var discounted_price = laptop.price * 0.5;
+
   } else {
     console.log('nothing match')
   }
@@ -276,6 +300,16 @@ router.post("/", async (req, res) => {
           buttons: []
         }
       }],
+      source: "virtual sales bot",
+      payload: {
+        name: "saeed",
+        age: 22
+      }
+    })
+  } else if (intent === 'laptop_order_negotiation_step2') {
+    return res.send({
+      fulfillmentText: discounted_price,
+      fulfillmentMessages: [],
       source: "virtual sales bot",
       payload: {
         name: "saeed",
