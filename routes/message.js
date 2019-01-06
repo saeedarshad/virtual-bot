@@ -96,6 +96,7 @@ router.post("/", async (req, res) => {
       ram: ram,
       inStock: true
     });
+    console.log("Laptop Output ", laptop);
     if (!Laptop) {
       var result = "Laptop not found";
       imageUrl =
