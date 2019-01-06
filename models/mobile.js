@@ -33,7 +33,9 @@ const mobileSchema = new mongoose.Schema({
 const Iphone = mongoose.model('Iphones', mobileSchema);
 const Samsung = mongoose.model('Samsungs', mobileSchema);
 const Mobile = mongoose.model('Mobiles', mobileSchema);
+const Mobile_temp = mongoose.model('MobilesTemp', mobileSchema);
 
 exports.Iphone = Iphone;
 exports.Samsung = Samsung;
 exports.Mobile = Mobile;
+exports.Mobile_temp = Mobile_temp;

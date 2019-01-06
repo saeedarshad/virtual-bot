@@ -7,7 +7,8 @@ var sentiment = new Sentiment();
 const {
   Iphone,
   Samsung,
-  Mobile
+  Mobile,
+  Mobile_temp
 } = require("../models/mobile");
 
 const {
@@ -62,6 +63,19 @@ router.post("/", async (req, res) => {
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
     } else {
+
+      const mobile_temp = new Mobile_temp({
+        name: laptop_model,
+        title: laptop.title,
+        color: colour,
+        storage: memory,
+        inStock: true,
+        thresholdPrice: laptop.thresholdPrice,
+        imageUrl: laptop.imageUrl,
+        price: laptop.price
+      });
+      await mobile_temp.save();
+
       console.log("Mobile Output ", mobile);
       var result = mobile.title + " at price : " + mobile.price + ", Do you like it?";
       imageUrl = mobile.imageUrl;
@@ -237,14 +251,16 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'laptop_order_negotiation_step2') {
 
-
     const laptopTemp = await Laptop_temp.findOne({}, {}, {
       sort: {
         'created_at': -1
       }
     });
 
-    var discounted_price = laptopTemp.price * 0.5;
+    var randomNumber = Math.floor((Math.random() * 300) + 200);
+    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2
+    var discounted_price = Math.max(Math.min(avg + randomNumber, laptopTemp.price), laptopTemp.thresholdPrice);
+
     console.log('Price : ', laptopTemp.price);
     console.log('Discountedddd : ', discounted_price);
   } else {
@@ -307,7 +323,7 @@ router.post("/", async (req, res) => {
     })
   } else if (intent === 'laptop_order_negotiation_step2') {
     return res.send({
-      fulfillmentText: discounted_price,
+      fulfillmentText: 'YOu can get on this price : ' + discounted_price,
       fulfillmentMessages: [],
       source: "virtual sales bot",
       payload: {
