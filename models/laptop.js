@@ -34,7 +34,7 @@ const laptopSchema = new mongoose.Schema({
 });
 
 const Laptop = mongoose.model('Laptops', laptopSchema);
-const Laptop_temp = mongoose.model('Laptops', laptopSchema);
+const Laptop_temp = mongoose.model('LaptopsTemp', laptopSchema);
 
 exports.Laptop = Laptop;
 exports.Laptop_temp = Laptop_temp;
