@@ -27,6 +27,9 @@ const mobileSchema = new mongoose.Schema({
     },
     imageUrl: {
         type: String
+    },
+    date: {
+        type: Date
     }
 });
 

@@ -117,6 +117,7 @@ router.post("/", async (req, res) => {
       const laptop_temp = new Laptop_temp({
         name: laptop_model,
         title: laptop.title,
+        date: Date.now(),
         color: colour,
         storage: memory,
         ram: ram,
