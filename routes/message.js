@@ -95,14 +95,14 @@ router.post("/", async (req, res) => {
     });
 
     const laptop_temp = new Laptop_temp({
-      // laptop
-      name: laptop_model,
+      laptop
+      /* name: laptop_model,
       title: laptop.title,
       color: colour,
       storage: memory,
       ram: ram,
       inStock: true,
-      threshold: laptop.threshold
+      threshold: laptop.threshold */
     });
     await laptop_temp.save();
 
