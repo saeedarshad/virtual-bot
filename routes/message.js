@@ -208,7 +208,7 @@ router.post("/", async (req, res) => {
 
       const order = new Order({
         userId: userID,
-        productId: mobile._id
+        productId: laptop._id
       });
       await order.save();
 
@@ -217,10 +217,10 @@ router.post("/", async (req, res) => {
       var content = '<h1>Here is Your order Details!</h1><br><h2>We are giving Halloween treat.So we are giving you 500 off.Happy Shopping!:)</h2><h3>Laptop :' + laptop_model + '</h3><h3>Colour : ' + colour + '</h3><h3>Storage  :' + storage + ' </h3><h3>Price  : ' + disountedPrice + '</h3><br><img src=' + laptop.imageUrl + '>';
       sendEmail(subject, content, receiver);
       result = receiver;
-      mobile_model = 'Email Sent to ';
+      laptop_model = 'Email Sent to ';
       imageUrl = 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTgoS83usvxagVAfmgo2f9cQW8e6ds6Yp25xCqz96Io8GQVrevGZg'
     } else {
-      mobile_model = 'Invalid Email!!';
+      laptop_model = 'Invalid Email!!';
       result = 'please enter valid email';
     }
 
@@ -265,7 +265,7 @@ router.post("/", async (req, res) => {
         age: 22
       }
     });
-  } else if (intent === "laptop_order") {
+  } else if (intent === "laptop_order" || intent === 'laptop_order_yes_custom_custom_custom') {
     return res.send({
       fulfillmentText: result,
       fulfillmentMessages: [{
