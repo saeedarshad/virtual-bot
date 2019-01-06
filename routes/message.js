@@ -226,10 +226,10 @@ router.post("/", async (req, res) => {
 
   } else if (intent === 'laptop_order_negotiation_step2') {
 
-    var colour = req.body.queryResult.outputContexts[2].parameters.colour;
-    var laptop_model = req.body.queryResult.outputContexts[2].parameters.model1;
-    var storage = req.body.queryResult.outputContexts[2].parameters.storage;
-    var ram = req.body.queryResult.outputContexts[2].parameters.ram;
+    var colour = req.body.queryResult.outputContexts[0].parameters.colour;
+    var laptop_model = req.body.queryResult.outputContexts[0].parameters.model1;
+    var storage = req.body.queryResult.outputContexts[0].parameters.storage;
+    var ram = req.body.queryResult.outputContexts[0].parameters.ram;
     console.log('Outputtttt :', req.body.queryResult.outputContexts)
     console.log('Rammmmmmm : ', ram);
 
