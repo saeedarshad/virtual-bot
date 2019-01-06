@@ -90,7 +90,11 @@ router.post("/", async (req, res) => {
         $gt: price - 1000,
         $lt: price + 1000
       }, */
-      name: laptop_model
+      name: laptop_model,
+      color: colour,
+      storage: memory,
+      ram: ram,
+      inStock: true
     });
     console.log("Laptop Output ", laptop);
     if (!laptop) {
