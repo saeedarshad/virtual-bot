@@ -258,8 +258,10 @@ router.post("/", async (req, res) => {
     });
 
     var randomNumber = Math.floor((Math.random() * 300) + 200);
-    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2
-    var discounted_price = Math.max(Math.min(avg + randomNumber, laptopTemp.price), laptopTemp.thresholdPrice);
+    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
+    var temp = avg + randomNumber;
+    var min = Math.min(temp, laptopTemp.price);
+    var discounted_price = Math.max(min, laptopTemp.thresholdPrice);
 
     console.log('Price : ', laptopTemp.price);
     console.log('Discountedddd : ', discounted_price);
