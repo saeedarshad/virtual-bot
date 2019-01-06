@@ -94,25 +94,25 @@ router.post("/", async (req, res) => {
       inStock: true
     });
 
-    const laptop_temp = new Laptop_temp({
-      name: laptop_model,
-      title: laptop.title,
-      color: colour,
-      storage: memory,
-      ram: ram,
-      inStock: true,
-      thresholdPrice: laptop.thresholdPrice,
-      imageUrl: laptop.imageUrl,
-      price: laptop.price
-    });
-    await laptop_temp.save();
-
     console.log("Laptop Output ", laptop);
     if (!laptop) {
       var result = "Laptop not found";
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
     } else {
+      const laptop_temp = new Laptop_temp({
+        name: laptop_model,
+        title: laptop.title,
+        color: colour,
+        storage: memory,
+        ram: ram,
+        inStock: true,
+        thresholdPrice: laptop.thresholdPrice,
+        imageUrl: laptop.imageUrl,
+        price: laptop.price
+      });
+      await laptop_temp.save();
+
       console.log("Laptop Output ", laptop);
       var result = laptop.title + " at price : " + laptop.price + ", Do you like it?";
       imageUrl = laptop.imageUrl;
