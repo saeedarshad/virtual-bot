@@ -67,7 +67,7 @@ router.post("/", async (req, res) => {
     }
 
   } else if (intent === "laptop_order") {
-    var laptop_model = req.body.queryResult.parameters.model;
+    var laptop_model = req.body.queryResult.parameters.model1;
     var colour = req.body.queryResult.parameters.colour;
     var memory = req.body.queryResult.parameters.storage;
     var ram = req.body.queryResult.parameters.ram;
@@ -172,7 +172,7 @@ router.post("/", async (req, res) => {
     if (validator.isEmail(message)) {
       var subject = 'Order Details';
       var colour = req.body.queryResult.outputContexts[2].parameters.colour;
-      var laptop_model = req.body.queryResult.outputContexts[2].parameters.model;
+      var laptop_model = req.body.queryResult.outputContexts[2].parameters.model1;
       var storage = req.body.queryResult.outputContexts[2].parameters.storage;
       var ram = req.body.queryResult.outputContexts[2].parameters.ram;
       var paymentMethod = req.body.queryResult.outputContexts[2].parameters.payment_method;
