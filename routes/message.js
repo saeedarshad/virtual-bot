@@ -275,10 +275,10 @@ router.post("/", async (req, res) => {
       }
     });
 
-    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
-    var temp = avg + Math.sqrt(avg / 2);
-    var min = Math.min(temp, laptopTemp.price);
-    var discounted_price = Math.max(min, laptopTemp.thresholdPrice);
+    /*  var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
+     var temp = avg + Math.sqrt(avg / 2);
+     var min = Math.min(temp, laptopTemp.price); */
+    var discounted_price = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
 
     console.log('Price : ', laptopTemp.price);
     console.log('Discountedddd : ', discounted_price);
@@ -322,10 +322,10 @@ router.post("/", async (req, res) => {
       }
     });
 
-    var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
-    var temp = avg + Math.sqrt(avg / 2);
-    var min = Math.min(temp, mobileTemp.price);
-    var discounted_price = Math.max(min, mobileTemp.thresholdPrice);
+    /*  var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
+     var temp = avg + Math.sqrt(avg / 2);
+     var min = Math.min(temp, mobileTemp.price); */
+    var discounted_price = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
 
     console.log('Price : ', mobileTemp.price);
     console.log('Discountedddd : ', discounted_price);
