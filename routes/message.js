@@ -56,7 +56,7 @@ router.post("/", async (req, res) => {
       storage: memory,
       inStock: true
     });
-    if (!Mobile) {
+    if (!mobile) {
       var result = "Mobile not found";
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
@@ -97,7 +97,7 @@ router.post("/", async (req, res) => {
       inStock: true
     });
     console.log("Laptop Output ", laptop);
-    if (!Laptop) {
+    if (!laptop) {
       var result = "Laptop not found";
       imageUrl =
         "https://vignette.wikia.nocookie.net/assassinscreed/images/3/39/Not-found.jpg/revision/latest?cb=20110517171552";
