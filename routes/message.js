@@ -68,6 +68,7 @@ router.post("/", async (req, res) => {
         name: laptop_model,
         title: laptop.title,
         color: colour,
+        date: Date.now(),
         storage: memory,
         inStock: true,
         thresholdPrice: laptop.thresholdPrice,
@@ -266,6 +267,84 @@ router.post("/", async (req, res) => {
 
     console.log('Price : ', laptopTemp.price);
     console.log('Discountedddd : ', discounted_price);
+  } else if (intent === 'laptop_order_negotiation_step3') {
+
+    const laptopTemp = await Laptop_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
+
+    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
+    var temp = avg + Math.sqrt(avg / 2);
+    var min = Math.min(temp, laptopTemp.price);
+    var discounted_price = Math.max(min, laptopTemp.thresholdPrice);
+
+    console.log('Price : ', laptopTemp.price);
+    console.log('Discountedddd : ', discounted_price);
+  } else if (intent === 'laptop_order_negotiation_step4') {
+
+    const laptopTemp = await Laptop_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
+
+    var randomNumber = Math.floor((Math.random() * 300) + 200);
+    var avg = (laptopTemp.price + laptopTemp.thresholdPrice) / 2;
+    var temp = avg - randomNumber;
+    var min = Math.min(temp, laptopTemp.price);
+    var discounted_price = Math.max(min, laptopTemp.thresholdPrice);
+
+    console.log('Price : ', laptopTemp.price);
+    console.log('Discountedddd : ', discounted_price);
+  } else if (intent === 'mobile_order_negotiation_step2') {
+
+    const mobileTemp = await Mobile_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
+
+    var randomNumber = Math.floor((Math.random() * 300) + 200);
+    var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
+    var temp = avg + randomNumber;
+    var min = Math.min(temp, mobileTemp.price);
+    var discounted_price = Math.max(min, mobileTemp.thresholdPrice);
+
+    console.log('Price : ', mobileTemp.price);
+    console.log('Discountedddd : ', discounted_price);
+  } else if (intent === 'mobile_order_negotiation_step3') {
+
+    const mobileTemp = await Mobile_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
+
+    var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
+    var temp = avg + Math.sqrt(avg / 2);
+    var min = Math.min(temp, mobileTemp.price);
+    var discounted_price = Math.max(min, mobileTemp.thresholdPrice);
+
+    console.log('Price : ', mobileTemp.price);
+    console.log('Discountedddd : ', discounted_price);
+  } else if (intent === 'mobile_order_negotiation_step4') {
+
+    const mobileTemp = await Mobile_temp.findOne({}, {}, {
+      sort: {
+        'created_at': -1
+      }
+    });
+
+    var randomNumber = Math.floor((Math.random() * 300) + 200);
+    var avg = (mobileTemp.price + mobileTemp.thresholdPrice) / 2;
+    var temp = avg - randomNumber;
+    var min = Math.min(temp, mobileTemp.price);
+    var discounted_price = Math.max(min, mobileTemp.thresholdPrice);
+
+    console.log('Price : ', mobileTemp.price);
+    console.log('Discountedddd : ', discounted_price);
   } else {
     console.log('nothing match')
   }
@@ -324,9 +403,11 @@ router.post("/", async (req, res) => {
         age: 22
       }
     })
-  } else if (intent === 'laptop_order_negotiation_step2') {
+  } else if (intent === 'laptop_order_negotiation_step2' || intent === 'laptop_order_negotiation_step3' ||
+    intent === 'laptop_order_negotiation_step4' || intent === 'mobile_order_negotiation_step2' ||
+    intent === 'mobile_order_negotiation_step2' || intent === 'mobile_order_negotiation_step2') {
     return res.send({
-      fulfillmentText: 'YOu can get on this price : ' + discounted_price,
+      fulfillmentText: 'You can get on this price : ' + discounted_price,
       fulfillmentMessages: [],
       source: "virtual sales bot",
       payload: {
