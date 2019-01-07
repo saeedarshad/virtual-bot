@@ -65,15 +65,15 @@ router.post("/", async (req, res) => {
     } else {
 
       const mobile_temp = new Mobile_temp({
-        name: laptop_model,
-        title: laptop.title,
+        name: mobile_model,
+        title: mobile.title,
         color: colour,
         date: Date.now(),
         storage: memory,
         inStock: true,
-        thresholdPrice: laptop.thresholdPrice,
-        imageUrl: laptop.imageUrl,
-        price: laptop.price
+        thresholdPrice: mobile.thresholdPrice,
+        imageUrl: mobile.imageUrl,
+        price: mobile.price
       });
       await mobile_temp.save();
 
@@ -383,7 +383,7 @@ router.post("/", async (req, res) => {
     intent === 'laptop_order_negotiation_step4' || intent === 'mobile_order_negotiation_step2' ||
     intent === 'mobile_order_negotiation_step2' || intent === 'mobile_order_negotiation_step2') {
     return res.send({
-      fulfillmentText: 'You can get on this price : ' + discounted_price,
+      fulfillmentText: 'You can get on this price : ' + discounted_price + ' With all accessories',
       fulfillmentMessages: [],
       source: "virtual sales bot",
       payload: {
